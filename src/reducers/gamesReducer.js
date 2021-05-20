@@ -3,7 +3,7 @@ const initState = {
   newGames: [],
   upComing: [],
 };
-
+//This reducer sets the payload from the action in its correct place
 const gamesReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_GAMES":

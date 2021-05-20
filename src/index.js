@@ -7,8 +7,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducers";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-
+//Compose is used to store the redux devtools inside a function because create store takes only two args
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//We apply the args rootReduce and we use the func to apply to it appplymiddleware and to apply to it thunk.
+//ergo, giving us the combined reducers and redux devtools and thunk
 const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)));
 
 ReactDOM.render(
