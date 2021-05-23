@@ -14,7 +14,7 @@ const getCurrentMonth = (i = 1) => {
   }
 };
 const getCurrentDay = () => {
-  const day = new Date().getDay();
+  const day = new Date().getDate();
   if (day < 10) {
     return `0${day}`;
   } else {
@@ -31,13 +31,20 @@ const notaWhileAgo = `${currentYear}-${pervMonth_2}-${currentDay}`;
 const lastDate = `${currentYear - 1}-${currentMonth}-${currentDay}`;
 const nextDate = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
+//Getting Search Queries for fetching games
 //Popular Games
 const popular_games = `games?${key}&dates=${lastDate},${currentDate}&ordering=-rating&page_size=10`;
 //New games
 const new_games = `games?${key}&dates=${notaWhileAgo},${currentDate}&ordering=-rating&page_size=10`;
 //Upcoming
 const upcoming = `games?${key}&dates=${currentDate},${nextDate}&ordering=-added&page_size=10`;
-
+//finshed dately updated urls of the fetch link from the api
 export const popularGamesURL = () => `${base_url}${popular_games}`;
 export const newGamesURL = () => `${base_url}${new_games}`;
 export const upcomingGamesURL = () => `${base_url}${upcoming}`;
+
+//GAME DETAILS
+export const gameDetailsURL = (game_id) => `${base_url}games/${game_id}?${key}`;
+//GAME SCREENSHOTS
+export const gameScreenShotURL = (game_id) =>
+  `${base_url}games/${game_id}/screenshots?${key}`;
