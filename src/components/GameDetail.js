@@ -7,41 +7,47 @@ import { useSelector } from "react-redux";
 
 const GameDetail = () => {
   //Data
-  const { screen, game } = useSelector((state) => state.detail);
+  const { screen, game, isLoading } = useSelector((state) => state.detail);
   return (
-    <CardShadow>
-      <Detail>
-        <Stats>
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
-          </div>
-          <Info>
-            <h3>Platforms</h3>
-            <Platforms>
-              {game.platforms &&
-                game.platforms.map((platform) => (
-                  <h3 key={platform.platform.key}>{platform.platform.name}</h3>
+    <>
+      {!isLoading && (
+        <CardShadow>
+          <Detail>
+            <Stats>
+              <div className="rating">
+                <h3>{game.name}</h3>
+                <p>Rating: {game.rating}</p>
+              </div>
+              <Info>
+                <h3>Platforms</h3>
+                <Platforms>
+                  {game.platforms &&
+                    game.platforms.map((platform) => (
+                      <h3 key={platform.platform.key}>
+                        {platform.platform.name}
+                      </h3>
+                    ))}
+                </Platforms>
+              </Info>
+            </Stats>
+            <Media>
+              <img src={game.background_image} alt={game.name} />
+            </Media>
+            <Description>{game.description_raw}</Description>
+            <div className="gallery">
+              {screen.results &&
+                screen.results.map((result, index) => (
+                  <img
+                    key={result.id}
+                    src={result.image}
+                    alt={`${game.name} num:${index}`}
+                  />
                 ))}
-            </Platforms>
-          </Info>
-        </Stats>
-        <Media>
-          <img src={game.background_image} alt={game.name} />
-        </Media>
-        <Description>{game.description_raw}</Description>
-        <div className="gallery">
-          {screen.results &&
-            screen.results.map((result, index) => (
-              <img
-                key={result.id}
-                src={result.image}
-                alt={`${game.name} num:${index}`}
-              />
-            ))}
-        </div>
-      </Detail>
-    </CardShadow>
+            </div>
+          </Detail>
+        </CardShadow>
+      )}
+    </>
   );
 };
 
