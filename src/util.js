@@ -3,11 +3,14 @@
 //string.match and regex is used to resize all of the varying formats images
 
 export const smallImage = (imagePath, size) => {
-  const image = imagePath.match(/media\/screenshots/)
-    ? imagePath.replace(
-        "media/screenshots",
-        `media/resize/${size}/-/screenshots`
-      )
-    : imagePath.replace("media/games", `media/resize/${size}/-/games`);
-  return image;
+  if (imagePath) {
+    const image = imagePath.match(/media\/screenshots/)
+      ? imagePath.replace(
+          "media/screenshots",
+          `media/resize/${size}/-/screenshots`
+        )
+      : imagePath.replace("media/games", `media/resize/${size}/-/games`);
+    return image;
+  }
+  return imagePath;
 };

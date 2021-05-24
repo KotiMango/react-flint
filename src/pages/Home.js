@@ -23,7 +23,7 @@ const Home = () => {
   const { popular, newGames, upComing } = useSelector((state) => state.games);
   return (
     <GameList>
-      <AnimateSharedLayout type="crossfade">
+      <AnimateSharedLayout>
         <AnimatePresence>
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
@@ -39,7 +39,7 @@ const Home = () => {
             />
           ))}
         </Games>
-        <h2>Release Radar</h2>
+        <h2 className="radar">Release Radar</h2>
         <Games>
           {newGames.map((game) => (
             <Game
@@ -71,6 +71,9 @@ const GameList = styled(motion.div)`
   padding: 0rem 5rem;
   h2 {
     padding: 5rem 0rem;
+  }
+  .radar {
+    position: absolute;
   }
 `;
 const Games = styled(motion.div)`

@@ -7,13 +7,47 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //Image Resizer
 import { smallImage } from "../util";
+//Images
+import playstation from "../img/playstation.svg";
+import steam from "../img/steam.svg";
+import xbox from "../img/xbox.svg";
+import nintendo from "../img/nintendo.svg";
+import apple from "../img/apple.svg";
+import gamepad from "../img/gamepad.svg";
+
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
+
+  //Exit detail
   const exitDetailHandler = (e) => {
     const element = e.target;
     if (element.classList.contains("shadow")) {
       document.body.style.overflow = "auto";
       history.push("/");
+    }
+  };
+
+  //Get Platform images
+  const getPlatform = (platform) => {
+    switch (platform) {
+      case "PlayStation 4":
+        return playstation;
+      case "PlayStation 5":
+        return playstation;
+      case "Xbox Series S/X":
+        return xbox;
+      case "Xbox S":
+        return xbox;
+      case "Xbox One":
+        return xbox;
+      case "PC":
+        return steam;
+      case "Nintendo Switch":
+        return nintendo;
+      case "iOS":
+        return apple;
+      default:
+        return gamepad;
     }
   };
   //Data
@@ -33,9 +67,11 @@ const GameDetail = ({ pathId }) => {
                 <Platforms>
                   {game.platforms &&
                     game.platforms.map((platform) => (
-                      <h3 key={platform.platform.key}>
-                        {platform.platform.name}
-                      </h3>
+                      <img
+                        key={platform.platform.id}
+                        src={getPlatform(platform.platform.name)}
+                        alt={platform.platform.name}
+                      ></img>
                     ))}
                 </Platforms>
               </Info>
