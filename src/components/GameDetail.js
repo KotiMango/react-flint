@@ -7,17 +7,21 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //Image Resizer
 import { smallImage } from "../util";
-//Images
+//Console Images
 import playstation from "../img/playstation.svg";
 import steam from "../img/steam.svg";
 import xbox from "../img/xbox.svg";
 import nintendo from "../img/nintendo.svg";
 import apple from "../img/apple.svg";
 import gamepad from "../img/gamepad.svg";
+//Star Images
+import keemStar from "../img/star-full.png";
+import notKeemStar from "../img/star-empty.png";
 
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
-
+  //Data
+  const { screen, game, isLoading } = useSelector((state) => state.detail);
   //Exit detail
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -25,6 +29,19 @@ const GameDetail = ({ pathId }) => {
       document.body.style.overflow = "auto";
       history.push("/");
     }
+  };
+  //Get Stars
+  const getStars = () => {
+    const stars = [];
+    const rating = Math.floor(game.rating);
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<img alt="star" key={i} src={keemStar}></img>);
+      } else {
+        stars.push(<img alt="noStar" key={i} src={notKeemStar}></img>);
+      }
+    }
+    return stars;
   };
 
   //Get Platform images
@@ -50,8 +67,6 @@ const GameDetail = ({ pathId }) => {
         return gamepad;
     }
   };
-  //Data
-  const { screen, game, isLoading } = useSelector((state) => state.detail);
   return (
     <>
       {!isLoading && (
@@ -61,6 +76,7 @@ const GameDetail = ({ pathId }) => {
               <div className="rating">
                 <h3>{game.name}</h3>
                 <p>Rating: {game.rating}</p>
+                {getStars()}
               </div>
               <Info>
                 <h3>Platforms</h3>
@@ -139,6 +155,11 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 
 const Info = styled(motion.div)`

@@ -23,7 +23,7 @@ const Home = () => {
   const { popular, newGames, upComing } = useSelector((state) => state.games);
   return (
     <GameList>
-      <AnimateSharedLayout>
+      <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
@@ -71,9 +71,6 @@ const GameList = styled(motion.div)`
   padding: 0rem 5rem;
   h2 {
     padding: 5rem 0rem;
-  }
-  .radar {
-    position: absolute;
   }
 `;
 const Games = styled(motion.div)`
