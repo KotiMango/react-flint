@@ -1,5 +1,10 @@
 import axios from "axios";
-import { popularGamesURL, newGamesURL, upcomingGamesURL } from "../api.js";
+import {
+  popularGamesURL,
+  newGamesURL,
+  upcomingGamesURL,
+  searchGamesURL,
+} from "../api.js";
 //Action Creator
 //Redux actions cannot be asynchronous thus, thunk is used
 export const loadGames = () => async (dispatch) => {
@@ -13,6 +18,17 @@ export const loadGames = () => async (dispatch) => {
       popular: popularData.data.results,
       newell: newData.data.results,
       upcoming: upcomingData.data.results,
+    },
+  });
+};
+
+export const fetchSearch = (game_name) => async (dispatch) => {
+  //fetching serach data
+  const searchData = await axios.get(searchGamesURL(game_name));
+  dispatch({
+    type: "FETCH_SEARCHED",
+    payload: {
+      searched: searchData.data.results,
     },
   });
 };

@@ -2,6 +2,7 @@ const initState = {
   popular: [],
   newGames: [],
   upComing: [],
+  searched: [],
 };
 //This reducer sets the payload from the action in its correct place
 const gamesReducer = (state = initState, action) => {
@@ -12,6 +13,16 @@ const gamesReducer = (state = initState, action) => {
         popular: action.payload.popular,
         newGames: action.payload.newell,
         upComing: action.payload.upcoming,
+      };
+    case "FETCH_SEARCHED":
+      return {
+        ...state,
+        searched: action.payload.searched,
+      };
+    case "CLEAR_SEARCH":
+      return {
+        ...state,
+        searched: [],
       };
     default:
       return { ...state };
