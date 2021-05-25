@@ -6,6 +6,7 @@ import logo from "../img/logo.svg";
 //redux and routes
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
+import { fade } from "../animations";
 const Nav = () => {
   const dispatch = useDispatch();
   const [textInput, setTextInput] = useState("");
@@ -26,7 +27,7 @@ const Nav = () => {
   };
 
   return (
-    <StyledNav>
+    <StyledNav variants={fade} initial="hidden" animate="show">
       <Logo onClick={clearSearch}>
         <img src={logo} alt="Logo" />
         <h1>Flint</h1>

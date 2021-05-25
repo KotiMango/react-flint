@@ -9,7 +9,7 @@ import Game from "../components/Game";
 import styled from "styled-components";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import { useLocation } from "react-router-dom";
-
+import { fade, photoAnim } from "../animations";
 const Home = () => {
   //Get the current browser location
   const location = useLocation();
@@ -24,7 +24,7 @@ const Home = () => {
     (state) => state.games
   );
   return (
-    <GameList>
+    <GameList variants={fade} initial="hidden" animate="show">
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetail pathId={pathId} />}
@@ -32,7 +32,7 @@ const Home = () => {
         {searched[0] && (
           <div className="searched">
             <h2>Query</h2>
-            <Games>
+            <Games variants={fade} initial="hidden" animate="show">
               {searched.map((game) => (
                 <Game
                   name={game.name}
